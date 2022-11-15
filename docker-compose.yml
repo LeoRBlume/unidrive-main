@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=unidrive
+      - MYSQL_USER=unidrive
+      - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
+    networks:
+      - spring-boot-laravel-mysql-network
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 20s
+        retries: 5
+
+  spring:
+    # image: unidrive_spring
+    build:
+      context: ./unidrive-spring-boot/
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - ${SPRING_PORT:-8080}:8080
+    networks:
+      - spring-boot-laravel-mysql-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://spring:8080/swagger-ui.html"]
+      timeout: 20s
+      retries: 5
+
+  # laravel:
+  #   build:
+  #     context: ./unidrive-laravel/
+  #     dockerfile: Dockerfile
+  #   restart: unless-stopped
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
+  #     spring:
+  #       condition: service_healthy
+  #   ports:
+  #     - '${LARAVEL_PORT:-80}:80'
+  #   environment:
+  #     - API_HOST=http://spring:8080
+  #     - DB_HOST=mysql
+  #     - DB_DATABASE=unidrive
+  #     - DB_USERNAME=root
+  #     - DB_PASSWORD=root
+  #   networks:
+  #     - spring-boot-laravel-mysql-network
+  #   volumes:
+  #       - ./unidrive-laravel/:/var/www/html
+      
+networks:
+  spring-boot-laravel-mysql-network:
+    driver: bridge
