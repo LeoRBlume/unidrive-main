@@ -1,0 +1,6 @@
+[submodule "unidrive-laravel"]
+	path = unidrive-laravel
+	url = https://github.com/weslleyrichardc/unidrive-laravel.git
+[submodule "unidrive-spring-boot"]
+	path = unidrive-spring-boot
+	url = https://github.com/LeoRBlume/Unidrive.git
