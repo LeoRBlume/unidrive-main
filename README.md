@@ -19,5 +19,5 @@
 - docker-compose.yml
     - Descomentar o serviço do laravel
 - unidrive-laravel/.env
-    - DB_HOST=spring
+    - DB_HOST=mysql
 - `docker compose up` para subir o MySQL(localhost:3306), Spring Boot(localhost:8080) e o Laravel(localhost:80) pelo docker
