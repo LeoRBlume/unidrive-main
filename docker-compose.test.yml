@@ -12,6 +12,8 @@ services:
       - MYSQL_PASSWORD=password
     ports:
       - 3306:3306
+    volumes:
+      - $PWD/mysql:/var/lib/mysql
     networks:
       - spring-boot-laravel-mysql-network
     healthcheck:

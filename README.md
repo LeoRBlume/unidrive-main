@@ -1,5 +1,10 @@
 # Unidrive
 
+    Para baixar este repositório com os submodulos, usar o comando abaixo:
+- `git clone --recurse-submodules https://github.com/weslleyrichardc/unidrive.git`
+
+---
+
 ## Desenvolvimento ([Docker Compose](./docker-compose.dev.yml))
 1. Subir Banco de Dados e Backend
     - `docker compose -f docker-compose.dev.yml up -d` para subir o MySQL (localhost:3306) e o [Spring Boot](http://localhost:8080/swagger-ui.html) pelo docker
@@ -11,8 +16,11 @@
         - `npm run dev` para subir o Vite (localhost:5173)
             - Compila as mudanças feitas ao salvar e adiciona as classes css usadas pelo tailwind
         - `npm run build` para compilar o mudanças de css e otimizações para produção
-
-## Teste ([Docker Compose](./docker-compose.prod.yml))
+---
+## Teste - Com banco de dados local ([Docker Compose](./docker-compose.test.yml))
+- `docker compose -f docker-compose.test.yml up -d` para subir o MySQL (localhost:3306), [Spring Boot](http://localhost:8080/swagger-ui.html) e o [Laravel](http://localhost) pelo docker
+---
+## Teste - Com banco de dados externo ([Docker Compose](./docker-compose.prod.yml))
 - Verificar arquivos se estão com as credenciais de produção
     - [.env](./unidrive-laravel/.env)
         - `DB_HOST`
