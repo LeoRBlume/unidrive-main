@@ -4,3 +4,6 @@
 [submodule "unidrive-spring-boot"]
 	path = unidrive-spring-boot
 	url = https://github.com/LeoRBlume/Unidrive.git
+[submodule "unidrive-documentation"]
+	path = unidrive-documentation
+	url = https://github.com/elian-roventini/ModeloUML.git
